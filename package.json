@@ -1,0 +1,14 @@
+{
+    "name": "tosidestudio-account",
+    "version": "1.0.22",
+    "dependencies": {
+        "axios": "^0.26.1",
+        "cookies-next": "^2.0.4",
+        "next": "^12.1.0"
+    },
+    "files": [
+        "index.js",
+        "dist/*.css"
+    ]
+}
+  
