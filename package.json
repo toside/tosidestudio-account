@@ -1,6 +1,7 @@
 {
     "name": "tosidestudio-account",
-    "version": "1.0.22",
+    "version": "1.0.23",
+    "homepage": "https://github.com/toside/tosidestudio-account#readme",
     "dependencies": {
         "axios": "^0.26.1",
         "cookies-next": "^2.0.4",
