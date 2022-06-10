@@ -22,7 +22,7 @@ npm i tosidestudio-account
 
 This code must be insert in the file `_app.js` and without the style the library can't work.
 
-```
+```js
 import 'tosidestudio-account/dist/style.css';
 ```
 
