@@ -18,6 +18,14 @@ The library is compatible with NextJS
 npm i tosidestudio-account
 ```
 
+### Import CSS styles
+
+This code must be insert in the file `_app.js` and without the style the library can't work.
+
+```
+import 'tosidestudio-account/dist/style.css';
+```
+
 Credits
 -------
 Barioglio Simone
