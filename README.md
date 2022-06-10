@@ -45,6 +45,28 @@ if(TosideAccount.tosideLoginCheck()){
 }
 ```
 
+### Login method
+
+To open the view with the login module call the method `tosideLoginModule`
+
+```js
+TosideAccount.tosideLoginModule()
+```
+
+### Signup method
+
+Call the method `tosideSignupModule` to show the view with the signup module
+
+```js
+TosideAccount.tosideSignupModule()
+```
+
+### Lgout
+
+```js
+TosideAccount.tosideLogout()
+```
+
 Credits
 -------
 Barioglio Simone
