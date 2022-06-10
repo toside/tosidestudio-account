@@ -26,6 +26,25 @@ This code must be insert in the file `_app.js` and without the style the library
 import 'tosidestudio-account/dist/style.css';
 ```
 
+### Import library
+
+To use the method of the package import the library in the file.
+```js
+import * as TosideAccount from 'tosidestudio-account'
+```
+
+### Check login
+
+Method to check if the user is logged or not. 
+
+```js
+if(TosideAccount.tosideLoginCheck()){
+    // User is logged
+} else {
+    // User is not logged
+}
+```
+
 Credits
 -------
 Barioglio Simone
