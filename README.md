@@ -73,4 +73,4 @@ Barioglio Simone
 
 License
 -------
-&copy; Toside Studio Sobe Inc. - No License  - [www.tosidestudio.com](https://www.tosidestudio.com/)
+&copy; Toside Studio Sobe Inc. - [www.tosidestudio.com](https://www.tosidestudio.com/)
