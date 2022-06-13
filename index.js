@@ -290,7 +290,6 @@ module.exports = {
                     password: userPwd
                 }
             }).then(function (response) {
-                console.log(secretKey)
                 const numUsers = response.data.totalNumUsers;
                 if(numUsers==1) {
                     const user = response.data.userData
