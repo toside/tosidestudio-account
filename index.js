@@ -2,9 +2,11 @@ var CookieNext = require('cookies-next');
 var axios = require('axios');
 var Router = require('next/router');
 
+const urlTosideAccount = "https://account.tosidestudio.com"
+
 module.exports = {
     
-    tosideLoginModule: function tosideLoginModule () {
+    tosideLoginModule: function tosideLoginModule (secretKey) {
 
         var sc = document.createElement("link")
         sc.setAttribute("href", "http://localhost:3006/css/tosidestudioaccount.css")
@@ -61,7 +63,7 @@ module.exports = {
         loginButton.addEventListener('click', function handleClick(event) {
             const userEmail = document.getElementById("tosideaccountUserEmail").value
             const userPwd = document.getElementById("tosideaccountUserPwd").value
-            module.exports.tosideLoginUser(userEmail, userPwd)
+            module.exports.tosideLoginUser(userEmail, userPwd, secretKey)
         });
 
         var bottomlinkDiv = document.createElement('div')
@@ -78,7 +80,7 @@ module.exports = {
         var elemDiv = document.getElementById("tosidestudioaccount")
         elemDiv.remove()
     },
-    tosideSignupModule: function tosideSignupModule() {
+    tosideSignupModule: function tosideSignupModule(secretKey) {
 
         var sc = document.createElement("link")
         sc.setAttribute("href", "http://localhost:3006/css/tosidestudioaccount.css")
@@ -179,7 +181,7 @@ module.exports = {
             const userLastname = document.getElementById("tosideaccountUserLastname").value
             const userEmail = document.getElementById("tosideaccountUserEmail").value
             const userPwd = document.getElementById("tosideaccountUserPwd").value
-            module.exports.tosideSignupUser(userFirstname, userLastname, userEmail, userPwd)
+            module.exports.tosideSignupUser(userFirstname, userLastname, userEmail, userPwd, secretKey)
         });
 
         var bottomlinkDiv = document.createElement('div')
@@ -197,10 +199,10 @@ module.exports = {
 
         document.body.appendChild(elemDiv);
     },
-    tosideConfirmationcodeModule: function tosideConfirmationcodeModule(userEmail) {
+    tosideConfirmationcodeModule: function tosideConfirmationcodeModule(userEmail, secretKey) {
 
         var sc = document.createElement("link")
-        sc.setAttribute("href", "http://localhost:3006/css/tosidestudioaccount.css")
+        sc.setAttribute("href", urlTosideAccount+"/css/tosidestudioaccount.css")
         sc.setAttribute("rel", "stylesheet")
         document.head.appendChild(sc);
 
@@ -250,7 +252,7 @@ module.exports = {
         loginButton.addEventListener('click', function handleClick(event) {
             const code = document.getElementById("tosideaccountCode").value
             const userEmail = document.getElementById("tosideaccountUserEmail").value
-            module.exports.tosideConfirmCode(code, userEmail)
+            module.exports.tosideConfirmCode(code, userEmail, secretKey)
         });
 
         var bottomlinkDiv = document.createElement('div')
@@ -273,21 +275,22 @@ module.exports = {
             Router.reload(window.location.pathname)
         }
     },
-    tosideLoginUser: function tosideLoginUser(userEmail, userPwd) {
+    tosideLoginUser: function tosideLoginUser(userEmail, userPwd, secretKey) {
 
         if(!module.exports.tosideLoginCheck()) {
             axios({
                 method: 'post',
-                url: 'http://localhost:5006/api/v1/user/login',
+                url: urlTosideAccount+':5006/api/v1/user/login',
                 headers: {
                     'Content-Type': 'application/json',
-                    'secretkey': 'm34aGmjrcfzkRVLfCxVR60C7Pfkl0dr8'
+                    'secretkey': secretKey
                 },
                 data: {
                     email: userEmail,
                     password: userPwd
                 }
             }).then(function (response) {
+                console.log(secretKey)
                 const numUsers = response.data.totalNumUsers;
                 if(numUsers==1) {
                     const user = response.data.userData
@@ -299,15 +302,15 @@ module.exports = {
             });
         }
     },
-    tosideSignupUser: function tosideSignupUser(userFirstname, userLastname, userEmail, userPwd) {
+    tosideSignupUser: function tosideSignupUser(userFirstname, userLastname, userEmail, userPwd, secretKey) {
 
         if(!module.exports.tosideLoginCheck()) {
             axios({
                 method: 'put',
-                url: 'http://localhost:5006/api/v1/user/signup',
+                url: urlTosideAccount+':5006/api/v1/user/signup',
                 headers: {
                     'Content-Type': 'application/json',
-                    'secretkey': 'm34aGmjrcfzkRVLfCxVR60C7Pfkl0dr8'
+                    'secretkey': secretKey
                 },
                 data: {
                     firstname: userFirstname,
@@ -320,20 +323,20 @@ module.exports = {
                     alert("Error")
                 } else {
                     module.exports.tosideLoginModuleClose()
-                    module.exports.tosideConfirmationcodeModule(userEmail)
+                    module.exports.tosideConfirmationcodeModule(userEmail, secretKey)
                 }
             });
         }
     },
-    tosideConfirmCode: function tosideConfirmCode(code, userEmail) {
+    tosideConfirmCode: function tosideConfirmCode(code, userEmail, secretKey) {
 
         if(!module.exports.tosideLoginCheck()) {
             axios({
                 method: 'post',
-                url: 'http://localhost:5006/api/v1/user/confirm',
+                url: urlTosideAccount+':5006/api/v1/user/confirm',
                 headers: {
                     'Content-Type': 'application/json',
-                    'secretkey': 'm34aGmjrcfzkRVLfCxVR60C7Pfkl0dr8'
+                    'secretkey': secretKey
                 },
                 data: {
                     email: userEmail,
