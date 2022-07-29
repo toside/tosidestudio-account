@@ -9,7 +9,7 @@ module.exports = {
     tosideLoginModule: function tosideLoginModule (secretKey) {
 
         var sc = document.createElement("link")
-        sc.setAttribute("href", "http://localhost:3006/css/tosidestudioaccount.css")
+        sc.setAttribute("href", urlTosideAccount+"/css/tosidestudioaccount.css")
         sc.setAttribute("rel", "stylesheet")
         document.head.appendChild(sc);
 
@@ -83,7 +83,7 @@ module.exports = {
     tosideSignupModule: function tosideSignupModule(secretKey) {
 
         var sc = document.createElement("link")
-        sc.setAttribute("href", "http://localhost:3006/css/tosidestudioaccount.css")
+        sc.setAttribute("href", urlTosideAccount+"/css/tosidestudioaccount.css")
         sc.setAttribute("rel", "stylesheet")
         document.head.appendChild(sc);
 
