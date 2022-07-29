@@ -278,6 +278,8 @@ module.exports = {
     tosideLoginUser: function tosideLoginUser(userEmail, userPwd, secretKey) {
 
         if(!module.exports.tosideLoginCheck()) {
+            // Request Login
+            module.exports.tosideLoading(true)
             axios({
                 method: 'post',
                 url: urlTosideAccount+':5006/api/v1/user/login',
@@ -290,6 +292,7 @@ module.exports = {
                     password: userPwd
                 }
             }).then(function (response) {
+                module.exports.tosideLoading(false)
                 const numUsers = response.data.totalNumUsers;
                 if(numUsers==1) {
                     const user = response.data.userData
@@ -304,6 +307,7 @@ module.exports = {
     tosideSignupUser: function tosideSignupUser(userFirstname, userLastname, userEmail, userPwd, secretKey) {
 
         if(!module.exports.tosideLoginCheck()) {
+            module.exports.tosideLoading(true)
             axios({
                 method: 'put',
                 url: urlTosideAccount+':5006/api/v1/user/signup',
@@ -318,6 +322,7 @@ module.exports = {
                     password: userPwd
                 }
             }).then(function (response) {
+                module.exports.tosideLoading(false)
                 if(response.data.error !== undefined) {
                     alert("Error")
                 } else {
@@ -330,6 +335,7 @@ module.exports = {
     tosideConfirmCode: function tosideConfirmCode(code, userEmail, secretKey) {
 
         if(!module.exports.tosideLoginCheck()) {
+            module.exports.tosideLoading(true)
             axios({
                 method: 'post',
                 url: urlTosideAccount+':5006/api/v1/user/confirm',
@@ -342,6 +348,7 @@ module.exports = {
                     confirmationcode: code
                 }
             }).then(function (response) {
+                module.exports.tosideLoading(false)
                 if(response.data.error !== undefined) {
                     alert("Error")
                 } else {
@@ -355,6 +362,23 @@ module.exports = {
                 }
             });
         }
+    },
+    tosideLoading: function tosideLoading(showed){
+
+        if(showed) {
+            // Append Loading
+            var loadingContainer = document.createElement('div')
+            loadingContainer.id = "tosidestudioaccountLoading"
+            loadingContainer.className = "loading"
+            var loadingSpinner = document.createElement('div')
+            loadingSpinner.className = "spinner"
+            loadingContainer.appendChild(loadingSpinner)
+            document.getElementById("tosidestudioaccount").appendChild(loadingContainer);
+        } else {
+            // Remove Loading
+            document.getElementById("tosidestudioaccount").removeChild(document.getElementById('tosidestudioaccountLoading'));
+        }
+
     }
 
 }
