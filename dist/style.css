@@ -32,6 +32,16 @@
         top: -o-calc( ( 100% - 513px  ) / 2 );
         top: calc( ( 100% - 513px  ) / 2 );
     }
+    @media screen and (max-width: 650px) {
+        #tosidestudioaccount .container{
+            width: -webkit-calc( 100% - 78px );
+            width: -moz-calc( 100% - 78px );
+            width: -ms-calc( 100% - 78px );
+            width: -o-calc( 100% - 78px );
+            width: calc( 100% - 78px );
+            margin: 0 39px;
+        }
+    }
         #tosidestudioaccount .container .producticon{
             float: left;
             width: 100%;
