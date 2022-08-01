@@ -35,7 +35,7 @@ module.exports = {
 
         var descDiv = document.createElement('div')
         descDiv.className = "description"
-        descDiv.innerHTML = "Accedi con il tuo account Toside Studio"
+        descDiv.innerHTML = "Login with your Toside Studio's account"
         containerDiv.appendChild(descDiv)
 
         var emailLabel = document.createElement('label')
@@ -289,14 +289,17 @@ module.exports = {
                 },
                 data: {
                     email: userEmail,
-                    password: userPwd
+                    password: userPwd,
+                    product: secretKey
                 }
             }).then(function (response) {
                 module.exports.tosideLoading(false)
                 const numUsers = response.data.totalNumUsers;
                 if(numUsers==1) {
                     const user = response.data.userData
+                    const authkey = response.data.authKey
                     CookieNext.setCookies('user',user, {secure: true});
+                    CookieNext.setCookies('authkey',authkey, {secure: true});
                     Router.reload(window.location.pathname)
                 } else {
                     alert("Failed!")
